@@ -30,9 +30,6 @@ import subprocess
 import setuptools
 
 
-with open('requirements.txt') as f:
-    requirements = f.read().splitlines()
-
 with open('twitchio/__init__.py') as f:
     version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re.MULTILINE).group(1)
 
@@ -46,7 +43,7 @@ if version.endswith(('a', 'b', 'rc')):
         p = subprocess.Popen(
             ['git', 'rev-list', '--count', 'HEAD'],
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            stderr=subprocess.PIPE,
         )
 
         out, err = p.communicate()
@@ -56,7 +53,7 @@ if version.endswith(('a', 'b', 'rc')):
         p = subprocess.Popen(
             ['git', 'rev-parse', '--short', 'HEAD'],
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            stderr=subprocess.PIPE,
         )
 
         out, err = p.communicate()
@@ -67,6 +64,9 @@ if version.endswith(('a', 'b', 'rc')):
 
 with open('README.rst') as f:
     readme = f.read()
+
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
 
 extras_require = {
     'docs': (
@@ -106,5 +106,5 @@ setuptools.setup(
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Utilities',
-      ]
+    ]
 )
