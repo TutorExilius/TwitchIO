@@ -240,7 +240,7 @@ class Client:
         except IndexError:
             pass
 
-    async def get_followers(self, user_id: Union[int, str], *, count: bool=False):
+    async def get_followers(self, user_id: Union[int, str], *, limit=None, count: bool=False):
         """|coro|
 
         Retrieves the list of users who are following a user.
@@ -265,7 +265,7 @@ class Client:
             Bad request while fetching users.
         """
 
-        return await self.http.get_followers(str(user_id), count=count)
+        return await self.http.get_followers(str(user_id), limit=limit, count=count)
 
     async def get_following(self, user_id: Union[int, str], count: bool=False):
         """|coro|
