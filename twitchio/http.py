@@ -74,7 +74,7 @@ class HTTPSession:
             data = await resp.json()
             self.token = data['access_token']
             self._refresh_token = data.get('refresh_token', None)
-            logging.warning("invalid or no token found, generated new token: %s", self.token)
+            logging.warning("invalid or no token found, generated new token.")
 
     async def request(self, method, url, *, params=None, limit=None, **kwargs):
         count = kwargs.pop('count', False)
